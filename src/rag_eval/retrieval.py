@@ -1,12 +1,18 @@
+import re
 from rank_bm25 import BM25Okapi
+
+STOPWORDS = {"how", "do", "i", "a", "an", "the", "to", "is", "of", "in", "my", "what", "can", "we", "you"}
+def tokenize(text:str) -> list[str]:
+    tokens = re.findall(r"[a-z0-9_]+",text.lower())
+    return[t for t in tokens if t not in STOPWORDS]
 
 class BM25Retriever:
     def __init__(self,chunks:list[dict[str,str]]):
         self.chunks=chunks
-        tokenized = [chunk["text"].lower().split()for chunk in chunks]
+        tokenized = [tokenize(chunk["text"])for chunk in chunks]
         self.bm25 = BM25Okapi(tokenized)
     def search(self,query:str,k:int) -> list[str]:
-        tokens=query.lower().split()
+        tokens=tokenize(query)
         scores = self.bm25.get_scores(tokens)
         ranked = sorted(range(len(scores)), key = lambda i:scores[i],reverse=True)
         return [self.chunks[i]["chunk_id"]for i in ranked[:k]]
