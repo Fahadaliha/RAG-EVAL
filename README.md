@@ -20,3 +20,10 @@ Coming next:
 ```bash
 uv run pytest
 ```
+
+## results
+
+| Setup                            | recall@3 | mrr  |
+| -------------------------------- | -------- | ---- |
+| BM25, whitespace tokens          | 0.73     | 0.68 |
+| BM25, cleaned tokens + stopwords | 0.87     | 0.74 |
