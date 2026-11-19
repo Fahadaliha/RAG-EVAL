@@ -30,3 +30,9 @@ uv run pytest
 | BM25 + stemming, chunk 200 / overlap 40     | 0.93     | 0.81 |
 | BM25 + stemming, chunk 500 / overlap 100    | 0.87     | 0.74 |
 | BM25 + stemming, chunk 1000 / overlap 200   | 0.80     | 0.75 |
+
+### Results on 30 questions
+
+| Setup                                    | recall@3 | mrr  |
+| ---------------------------------------- | -------- | ---- |
+| BM25 + stemming, chunk 500 / overlap 100 | 0.83     | 0.70 |
